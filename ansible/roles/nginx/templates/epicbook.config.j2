@@ -1,0 +1,15 @@
+server {
+    listen 80;
+    server_name _;
+
+    # {{ app_dest }} is replaced by Ansible using your group_vars value
+    root {{ app_dest }};
+    index index.html index.htm;
+
+    access_log /var/log/nginx/epicbook_access.log;
+    error_log  /var/log/nginx/epicbook_error.log;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
